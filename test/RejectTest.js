@@ -1,52 +1,37 @@
 const { expect } = require("chai")
 const { describe } = require("mocha");
-const { schedule } = require("../src/Scheduler");
+const { enqueue } = require("../src/Scheduler");
 
-describe('schedule a failing task', function () {
-    var retryCount = 1
-    var schedulePromise
+describe('run a failing task', function () {
 
-    function fakeFetch() {
+    function operation() {
         return new Promise((resolve, reject) => {
             reject("could not fetch")
         })
-
     }
 
     async function doSomething() {
-        fetchPromise = fakeFetch()
+        fetchPromise = operation()
+
+        var retryCount = 0
+
 
         fetchPromise
             .catch((err) => {
                 retryCount++
             })
 
-        return fetchPromise
+        return await fetchPromise
     }
 
-    before(() => {
-        schedulePromise = schedule("*/1 * * * * *", doSomething)
+    it('retries 3 times on failure by default', async function () {
+        // TODO write this test
+        expect(true).equals(false, "empty test")
 
-    })
-
-    after(() => {
-        schedulePromise.then((scheduledTask) => scheduledTask.stop())
-    })
-
-    it('executes on interval', async function () {
-
-        // enqueue(doSomething)
-    })
-
-    it('retries 3 times on failure', async function () {
-
-        // enqueue(doSomething)
-        // schedule("*/10 * * * * *", doSomething)
     })
 
     it('retries on failure with retry options', async function () {
-
-        // enqueue(doSomething)
-        // schedule("*/10 * * * * *", doSomething)
+        // TODO write this test
+        expect(true).equals(false, "empty test")
     })
 })

@@ -4,10 +4,11 @@ const { schedule } = require("../src/Scheduler");
 
 describe('run a passing task', function () {
     var retryCount = 1
+    var schedulePromise
 
     function fakeFetch() {
         return new Promise((resolve, reject) => {
-            resolve("fetched successfully")
+            reject("could not fetch")
         })
     }
 
@@ -22,7 +23,7 @@ describe('run a passing task', function () {
         return fetchPromise
     }
 
-    it('attempted once', async function () {
+    it('executes on interval', async function () {
         // TODO write this test
         expect(true).equals(false, "empty test")
     })
