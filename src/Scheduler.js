@@ -15,8 +15,8 @@ async function enqueue(task) {
 
     scheduler.enqueue(async () => {
         retry(task, retryOptions)
-            .then((x) => console.log(x))
-            .catch(() => console.log("gave up"))
+            .then((result) => console.log(result))
+            .catch((error) => console.log("gave up" + error))
     })
 
 }
@@ -26,14 +26,16 @@ function schedule(interval, promise, options = retryOptions) {
 
     retryOptions = options;
 
-    cron.schedule(interval, () => {
+    const scheduledTask = cron.schedule(interval, () => {
         console.log("enqueing promise")
         enqueue(promise)
     })
 
     return new Promise((resolve, reject) => {
-        
+        if(scheduledTask) resolve(scheduledTask)
+        else reject(null)
     })
 }
 
 module.exports.schedule = schedule
+module.exports.enqueue = enqueue
