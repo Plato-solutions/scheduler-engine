@@ -1,3 +1,3 @@
-var set = require("./Scheduler").set
+var schedule = require("./Scheduler.js").schedule
 
-module.exports.schedule = set
+module.exports.schedule = schedule
