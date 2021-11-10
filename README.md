@@ -5,7 +5,21 @@ A tool that allows you to set tasks and their schedules then executes tasks at s
 
 ## Usage
 
+### Import
+
+```javascript
+var schedule = require('scheduler-engine').schedule;
+```
+
 Pass the task you want to be performed as a promise and set the time/interval using a cron-style string.
+
+### To schedule a task:
+This will immediately start running the scheduling engine
+
+```javascript
+schedule(cronString, functionThatReturnsAPromise, options=defaultOptions)
+```
+
 
 ```javascript
 function doSomething() {
@@ -45,10 +59,9 @@ function doSomething() {
     return fetchPromise
 }
 
-// execute doSomething every 6 seconds
-schedule("*/6 * * * * *", doSomething)
+// execute doSomething every minute
+schedule("* * * * *", doSomething)
 ```
-
 
 ## Cron Syntax
 
