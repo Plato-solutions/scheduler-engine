@@ -19,7 +19,7 @@ async function enqueue(task) {
                 return result;
             })
             .catch((error) => {
-                alert(error)
+                console.log(error)
             })
     })
 
