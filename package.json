@@ -2,7 +2,7 @@
   "name": "scheduler-engine",
   "version": "1.0.0",
   "description": "executes tasks at specified intervals, returns a promise",
-  "main": "src/index.js",
+  "main": "src/Scheduler.js",
   "directories": {
     "test": "test"
   },
