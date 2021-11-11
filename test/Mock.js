@@ -1,23 +1,21 @@
-var retryCount = 0
-
-count = 0
+var count =  0
 
 module.exports.mockRejectAsync = () => {
-    return new Promise((resolve, reject) => {
-        count++
+    return new Promise((_, reject) => {
+        count = count + 1
         reject(count)
     })
 }
 
 module.exports.mockResolveAsync = () => {
-    return new Promise((resolve, reject) => {
-        count++
+    return new Promise((resolve, _) => {
+        count = count + 1
         resolve(count)
     })
 }
 
-module.exports.mockResolveTask = () => {
-    mockPromise = this.mockResolveAsync()
+module.exports.mockResolveTask = () =>  {
+    mockPromise = mockResolveAsync()
 
     mockPromise
         .catch((err) => {
@@ -27,12 +25,12 @@ module.exports.mockResolveTask = () => {
     return mockPromise
 }
 
-module.exports.mockRejectTask = () => {
-    mockPromise = this.mockRejectAsync()
+module.exports.mockRejectTask = () =>  {
+    mockPromise = mockRejectAsync()
 
     mockPromise
         .catch((err) => {
-            retryCount++
+            count++
         })
 
     return mockPromise
