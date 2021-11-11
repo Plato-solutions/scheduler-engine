@@ -10,31 +10,30 @@ var retryOptions = {
     maxAttempts: 4, // limit the number of retries upon failure
 }
 
-async function enqueue(task) {
-    await scheduler.waitForIdle()
-
-    scheduler.enqueue(async () => {
-        retry(task, retryOptions)
+function execute(task) {
+    return scheduler.enqueue(() => {
+        return retry(task, retryOptions)
             .then((result) => {
                 return result;
             })
             .catch((error) => {
-                console.log(error)
+                return error;
             })
     })
-
 }
 
-function schedule(interval, functionWithPromise, options = retryOptions) {
+function schedule(task, when, options = retryOptions) {
 
     retryOptions = options;
 
-    const scheduledTask = cron.schedule(interval, () => {
-        enqueue(functionWithPromise)
+    const scheduledTask = cron.schedule(when, () => {
+        scheduler.waitForIdle().then(
+            execute(task)
+        )
     })
 
     return scheduledTask
 }
 
 module.exports.schedule = schedule
-module.exports.enqueue = enqueue
+module.exports.execute = execute
