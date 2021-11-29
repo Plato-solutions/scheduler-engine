@@ -1,13 +1,14 @@
 {
   "name": "scheduler-engine",
   "version": "1.0.0",
-  "description": "executes tasks at specified intervals, returns a promise",
-  "main": "src/index.js",
+  "description": "executes tasks at specified intervals",
+  "main": "src/Scheduler.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "test-coverage": "nyc mocha"
   },
   "repository": {
     "type": "git",
@@ -18,19 +19,22 @@
     "scheduler",
     "schedule"
   ],
-  "author": "Emmanuel Nkrumah Sarpong",
+  "author": "Plato Solutions",
   "license": "ISC",
   "bugs": {
     "url": "https://gitlab.com/plato2/foundry/etl/scheduler-engine/issues"
   },
   "homepage": "https://gitlab.com/plato2/foundry/etl/scheduler-engine#readme",
   "devDependencies": {
+    "@sinonjs/fake-timers": "^8.1.0",
     "chai": "^4.3.4",
-    "mocha": "^9.1.3"
+    "mocha": "^9.1.3",
+    "nyc": "^15.1.0"
   },
   "dependencies": {
     "@lifeomic/attempt": "^3.0.1",
     "async-scheduler": "^1.4.4",
-    "node-cron": "^3.0.0"
+    "node-cron": "^3.0.0",
+    "sinon": "^12.0.1"
   }
 }
