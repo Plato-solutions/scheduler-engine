@@ -10,6 +10,11 @@ var retryOptions = {
     maxAttempts: 4, // limit the number of retries upon failure
 }
 
+/**
+ * executes the task once, immediately
+ * @param {function} task - function that returns a promise
+ * @returns { any } result - anything task() returns
+ */
 function execute(task) {
     return scheduler.enqueue(() => {
         return retry(task, retryOptions)
@@ -22,6 +27,13 @@ function execute(task) {
     })
 }
 
+/**
+ * waits until time/interval and executes the task
+ * @param { function } task - a function that returns a promise
+ * @param { string } when - a cron string
+ * @param { object } options - an object with retry options
+ * @returns ScheduledTask
+ */
 function schedule(task, when, options = retryOptions) {
 
     retryOptions = options;

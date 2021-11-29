@@ -32,7 +32,7 @@ describe('execute tasks', function () {
         expect(spy.callCount).equal(4)
     })
 
-    it('runs repeatedly', async function () {
+    it('schedule runs repeatedly', async function () {
         schedule(() => {
             return new Promise((resolve, reject) => {
                 console.log("executes task")
